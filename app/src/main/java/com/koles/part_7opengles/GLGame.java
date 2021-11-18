@@ -3,11 +3,13 @@ package com.koles.part_7opengles;
 import android.app.Activity;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLSurfaceView.Renderer;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -20,6 +22,7 @@ public abstract class GLGame extends Activity implements Game, Renderer {
         Finished,
         Idle
     }
+    InOut inOut;
     GLSurfaceView glView;
     GLGraphics glGraphics;
     Screen screen;
@@ -27,16 +30,18 @@ public abstract class GLGame extends Activity implements Game, Renderer {
     Object stateChanged = new Object();
     long startTime = System.nanoTime();
 
+
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         super.onCreate(savedInstanceState);
-        //screen = getStartScreen();
         glView = new GLSurfaceView(this);
         glView.setRenderer(this);
         glGraphics = new GLGraphics(glView);
+        inOut = new FileIO(getAssets());
         setContentView(glView);
     }
 
@@ -92,6 +97,11 @@ public abstract class GLGame extends Activity implements Game, Renderer {
     @Override
     public GLGraphics getGLGraphics() {
         return glGraphics;
+    }
+
+    @Override
+    public InOut getFileIO() {
+        return inOut;
     }
 
     @Override
