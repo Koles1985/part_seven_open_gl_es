@@ -6,4 +6,5 @@ public interface Game {
     Screen getCurrentScreen();
 
     GLGraphics getGLGraphics();
+    InOut getFileIO();
 }
