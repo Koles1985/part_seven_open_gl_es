@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Part_7OpenGLES" >
         <activity android:name=".Launcher"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:exported="true"
             android:label="OpenGL ES test">
             <intent-filter>

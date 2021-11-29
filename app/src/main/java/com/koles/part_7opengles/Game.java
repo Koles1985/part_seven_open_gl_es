@@ -7,4 +7,5 @@ public interface Game {
 
     GLGraphics getGLGraphics();
     InOut getFileIO();
+    TouchInput getTouchInput();
 }

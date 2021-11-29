@@ -29,6 +29,7 @@ public abstract class GLGame extends Activity implements Game, Renderer {
     GlGameState state = GlGameState.Initialisation;
     Object stateChanged = new Object();
     long startTime = System.nanoTime();
+    TouchInput touchInput;
 
 
     @RequiresApi(api = Build.VERSION_CODES.R)
@@ -42,6 +43,7 @@ public abstract class GLGame extends Activity implements Game, Renderer {
         glView.setRenderer(this);
         glGraphics = new GLGraphics(glView);
         inOut = new FileIO(getAssets());
+        touchInput = new TouchEventHandler(this, glView, 1, 1);
         setContentView(glView);
     }
 
@@ -102,6 +104,11 @@ public abstract class GLGame extends Activity implements Game, Renderer {
     @Override
     public InOut getFileIO() {
         return inOut;
+    }
+
+    @Override
+    public TouchInput getTouchInput() {
+        return touchInput;
     }
 
     @Override

@@ -48,6 +48,9 @@ public class TextureTriangleScreen extends Screen{
             gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER,
                     GL10.GL_NEAREST);
             gl.glBindTexture(GL10.GL_TEXTURE_2D, 0);
+            if(game.getFileIO().readAsset(textureName) != null){
+                game.getFileIO().readAsset(textureName).close();
+            }
             bitmap.recycle();
             return textureId;
         }catch(IOException e){
