@@ -16,6 +16,8 @@ public class Texture {
     int textureID;
     int minFilter;
     int magFilter;
+    float width;
+    float height;
 
     public Texture(Game game, String fileName){
         this.glGraphics = game.getGLGraphics();
@@ -34,6 +36,8 @@ public class Texture {
         try{
             in = inOut.readAsset(fileName);
             Bitmap bitmap = BitmapFactory.decodeStream(in);
+            width = bitmap.getWidth();
+            height = bitmap.getHeight();
             gl.glBindTexture(GL10.GL_TEXTURE_2D, textureID);
             GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0);
             setFilters(GL10.GL_NEAREST, GL10.GL_NEAREST);
